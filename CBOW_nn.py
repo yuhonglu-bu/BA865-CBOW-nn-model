@@ -20,17 +20,17 @@ word_to_index = {word: i for i, word in enumerate(vocab)}
 # Define make_cbow_data function
 def make_cbow_data(text, window_size):
   cbow_data = []
-  for text in cleaned_text:
-    for i in range(window_size, len(text) - window_size):
-      target = text[i]
+  for review in text:
+    for i in range(window_size, len(review) - window_size):
+      target = review[i]
       context_index = list(range(i - window_size, i + window_size + 1))
       context_index.remove(i)
       context = []
       for index in context_index:
-        context.append(text[index])
+        context.append(review[index])
       cbow_data.append((context, target))
   return cbow_data
-
+  
 # Define CBOW model here
 import torch
 from torch import nn, optim
